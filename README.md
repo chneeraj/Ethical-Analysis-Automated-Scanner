@@ -1,114 +1,112 @@
-Automated Web Vulnerability Scanner (AWVS)
-Project Overview
-Automated Web Vulnerability Scanner (AWVS) is a Python-Flask-based application designed for deep, authenticated web security testing. It automates vulnerability discovery—like SQL Injection, Cross-Site Scripting, and Insecure Direct Object Reference (IDOR)—in modern web applications, with special attention to authenticated user areas that are commonly missed by traditional scanners. This project was developed by Neeraj Chirravuri for the MSc in Cyber Security at the University of Roehampton.
+#Automated Web Vulnerability Scanner (AWVS)
+#Overview
+AWVS is a Python-Flask tool for deep, authenticated vulnerability scanning of modern web applications. It automates the discovery of flaws like SQL Injection, Cross-Site Scripting, and Broken Access Control (IDOR) in both public and authenticated areas, generating both PDF and JSON reports for stakeholders and developers.
 
-Problem Statement
-Modern web applications have dynamic, authenticated attack surfaces where critical vulnerabilities may be hidden. Manual security reviews are time-consuming and often miss post-login flaws, risking privacy breaches, financial loss, and compliance violations. AWVS addresses the urgent need for an agile, reproducible security assessment tool that penetrates authenticated user spaces and delivers actionable results for both developers and stakeholders.
+#Table of Contents
+Features
 
-Key Features
-Authenticated Scanning: Simulates real user login, including CSRF token handling, to access protected resources.
+Installation
 
-Targeted Vulnerability Testing: Detects Reflected XSS, Error-Based SQLi, IDOR in API endpoints, and missing critical HTTP security headers.
+Quick Start
 
-Single-Page Application (SPA) Awareness: Heuristically discovers routes/API endpoints often hidden from simple crawlers.
+Usage Example
 
-Robust Reporting: Outputs both stakeholder-friendly PDFs and machine-readable JSON reports.
+Technical Details
 
-Secure by Design: Implements encryption, user authentication, auto-deletion of sensitive reports, and mandatory user compliance warnings for ethical use.
+Evaluation
 
-Technical Stack
-Backend: Python 3.x
+Limitations
 
-Framework: Flask (local web server for orchestration and UI)
+Ethics
 
-Core Libraries: requests, BeautifulSoup, urllib.parse, reportlab
+Acknowledgements
 
-Frontend: HTML/JavaScript (dynamic forms for input, JSON asset lists)
+References
 
-PDF Generation: reportlab
+Features
+Authenticated scanning (handles login, CSRF tokens)
 
-Data Security: AES-256 encrypted output, access control with Flask.
+Tests for SQLi, XSS, IDOR, and missing headers
 
-Project Structure and Main Components
-webapp.py — All-in-one script: website scanning logic, web server, report generation.
+SPA-aware crawler for modern apps
 
-WebsiteScanner class — Handles login, crawling, vulnerability scans, report formatting.
+Reports in PDF (for management) and JSON (for devs)
 
-Modules:
+Secure output (AES-256, auto-deletion, access control)
 
-Login/CSRF manager
+User warnings & ethical compliance built-in
 
-Spider/crawler (HTML and SPA-aware)
-
-Vulnerability modules (SQLi, XSS, IDOR, header/config check)
-
-PDF/JSON reporting engine
-
-User-facing web UI for entering scan targets and receiving reports.
-
-Example scan reports and demonstration screencast.
-
-Usage
-Clone/download the repository and required files (including webapp.py).
-
-Install dependencies (pip install -r requirements.txt).
-
-Run the Flask app:
-
-text
+#Installation
+bash
+git clone https://github.com/yourusername/awvs.git
+cd awvs
+pip install -r requirements.txt
+Quick Start
+bash
 python webapp.py
-Navigate to the local web interface as instructed in the terminal.
+Open your browser and navigate to the local provided address. Enter your scan target credentials, launch, and download your scan results.
 
-Enter targets: Provide base URL, login credentials, and (optionally) POST login URL.
+#Usage Example
+Insert your web targets one by one, or paste a JSON array for batch scans:
 
-Launch scan and receive PDF/JSON report downloads.
-
-Example
 json
 [
   {
     "baseurl": "https://example.com",
     "loginurl": "https://example.com/login",
-    "username": "testuser",
-    "password": "password123"
+    "username": "user1",
+    "password": "securepassword"
   }
 ]
-Evaluation and Results
-Validated against known vulnerable web environments.
+#Technical Details
+Backend: Python 3.x, Flask, requests, BeautifulSoup
 
-AWVS reduced initial vulnerability scan time from ~48 hours to under 5 minutes.
+Reporting: reportlab (PDF), JSON output
 
-Detected all tested cases of Reflected XSS and error-based SQLi, plus multiple IDOR issues in test APIs.
+Security: Encrypted outputs, controlled retention, user authentication
 
-Integrates seamlessly into development cycles for proactive security assurance.
+Main file: webapp.py
 
-Limitations
-Does not handle advanced CAPTCHAs, MFA, or stored/blind SQLi.
+Core class: WebsiteScanner — manages stateful, session-based scan logic
 
-Focuses on URLEncoded flaws, not complex business logic.
+#Evaluation
+Reduced scan time from 48h (manual) to under 5min
 
-No headless browser; limited to what is exposed via HTTP(S) and parsed HTML/SPA logic.
+High detection rate for tested vulnerabilities (Reflected XSS, Error-based SQLi, IDOR)
 
-Ethical and Legal Compliance
-Ethical Use Only: Scanning is intrusive and must have asset owner’s written consent.
+Tested in live and intentionally vulnerable environments
 
-User Authentication: All reports are encrypted and auto-deleted after seven days.
+#Limitations
+Does not support advanced login flows (CAPTCHA/MFA)
 
-Code of Conduct: Explicit disclaimers warn against misuse; compliance is mandatory.
+Focuses on URL-parameter flaws (not full business logic analysis)
 
-Acknowledgments
+No headless browser automation (pure HTTP/HTML/SPA logic)
+
+#Ethics
+Authorized Testing Only: Use with owner’s written permission
+
+User Authentication & Data Security: All findings are encrypted and deleted after 7 days
+
+Code of Conduct: Explicit warnings and compliance statements protect responsible use
+
+#Acknowledgements
+University of Roehampton, MSc Cyber Security
+
 Supervisor: Mastaneh Davis
 
-Faculty and colleagues, University of Roehampton
+Community: Flask, requests, BeautifulSoup, reportlab
 
-Open source community (Flask, requests, BeautifulSoup, reportlab)
+Open source security standards (OWASP Top 10)
 
-Reference standards: OWASP Top 10, responsible disclosure guidelines.
-
-References
-OWASP Top 10, 2021
+#References
+OWASP Top 10 (2021)
 
 Geeks for Geeks, Stack Overflow
 
-Academic literature on web application security, automated scanning, and ethical vulnerability disclosure.
+“Automated Web Vulnerability Scanner MSc Report” – Neeraj Chirravuri
+
+For issues or contributing, please see [CONTRIBUTING.md] and [LICENSE].
+
+This template follows current GitHub community best practices for documentation, maintainability, and project visibility. Adjust URLs, contact, and file names as needed for your for your repository.```markdown
 
