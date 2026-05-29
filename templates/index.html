@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Advanced Vulnerability Scanner</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .form-container { max-width: 800px; margin: 0 auto; }
+                .website-form { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+                .form-group { margin-bottom: 10px; }
+                label { display: inline-block; width: 120px; font-weight: bold; }
+                input[type="text"], input[type="password"] { 
+                    padding: 8px; width: 300px; border: 1px solid #ddd; border-radius: 4px; 
+                }
+                button { 
+                    padding: 8px 15px; margin: 5px; background: #4CAF50; color: white; 
+                    border: none; border-radius: 4px; cursor: pointer; 
+                }
+                button:hover { background: #45a049; }
+                #websites-container { margin-bottom: 20px; }
+                .remove-btn { background: #f44336; }
+                .remove-btn:hover { background: #d32f2f; }
+                .json-btn { background: #219; }
+            .json-btn:hover { background: #1976d2; }
+            textarea { width: 100%; height: 150px; }
+            .password-input { background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+        </style>
+        <script>
+            function addWebsiteBlock() {
+                const container = document.getElementById('websites-container');
+                const block = document.createElement('div');
+                block.className = 'website-form';
+                block.innerHTML = `
+                    <div class="form-group"><label>Base URL</label><input type="text" name="base_url" placeholder="https://example.com"></div>
+                    <div class="form-group"><label>Login URL</label><input type="text" name="login_url" placeholder="https://example.com/login.php"></div>
+                    <div class="form-group"><label>Username</label><input type="text" name="username" placeholder="admin"></div>
+                    <div class="form-group"><label>Password</label><input type="password" name="password" placeholder="password"></div>
+                    <div><button type="button" class="remove-btn" onclick="removeBlock(this)">Remove</button></div>
+                `;
+                container.appendChild(block);
+            }
+
+            function removeBlock(btn) {
+                const block = btn.closest('.website-form');
+                if (block) block.remove();
+            }
+
+            function toggleJsonEditor() {
+                const editor = document.getElementById('json-editor');
+                editor.style.display = editor.style.display === 'none' ? 'block' : 'none';
+            }
+
+            window.onload = function() {
+                if (!document.querySelectorAll('.website-form').length) addWebsiteBlock();
+            };
+        </script>
+        </head>
+        <body>
+            <div class="form-container">
+                <h1>Advanced Vulnerability Scanner</h1>
+                <p>The scanner will create a ZIP archive containing all reports and logs. Enter a password below to protect the contents.</p>
+                <form method="post">
+                    
+                    <div class="password-input">
+                        <div class="form-group">
+                            <label>Report Password</label>
+                            <input type="password" name="report_password" placeholder="Enter password to protect reports (optional)">
+                            <p style="font-size: 0.8em; color: #555; margin-top: 5px;">This password protects the PDF files and the final ZIP file containing the JSON reports and logs.</p>
+                        </div>
+                    </div>
+
+                    <div id="websites-container"></div>
+                    <div>
+                        <button type="button" onclick="addWebsiteBlock()">Add Website</button>
+                        <button type="button" class="json-btn" onclick="toggleJsonEditor()">Toggle JSON Editor</button>
+                    </div>
+                    
+                    <div id="json-editor" style="display:none;">
+                        <p>You can also paste a JSON array:</p>
+                        <pre>[
+  {
+    "base_url": "https://example.com",
+    "login_url": "https://example.com/login.php",
+    "username": "admin",
+    "password": "password"
+  }
+]</pre>
+                        <label for="websites">Websites JSON</label>
+                        <textarea name="websites" id="websites" placeholder='Paste JSON here...'></textarea>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <button type="submit">Scan Websites</button>
+                    </div>
+                </form>
+            </div>
+        </body>
+        </html>
