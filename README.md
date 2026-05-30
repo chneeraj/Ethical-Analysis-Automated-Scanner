@@ -2,7 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
 [![Flask](https://img.shields.io/badge/flask-2.0+-green.svg)](https://flask.palletsprojects.com)
-[![License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE.md)
 
 A comprehensive web application vulnerability scanner that automatically detects SQL Injection, XSS, missing security headers, and sensitive data exposure across multiple websites simultaneously.
 
